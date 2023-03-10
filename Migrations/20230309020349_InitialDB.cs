@@ -25,6 +25,7 @@ namespace Funcionarios.API.Migrations
                 {
                     table.PrimaryKey("PK_Funcionarios", x => x.cdMatricula);
                 });
+            migrationBuilder.Sql("DBCC CHECKIDENT ('Funcionarios', RESEED, 1000000)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
