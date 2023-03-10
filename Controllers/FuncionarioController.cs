@@ -57,7 +57,8 @@ namespace Funcionarios.API.Controllers
         }
 
         //funcionarios?unidade={nome_unidade}
-        [HttpGet("{unidade}")]
+        [HttpGet]
+        [Route("unidade")]
         public ActionResult<IEnumerable<FuncionarioModel>> ListarPorUnidade([FromQuery] string unidade)
         {
             var funcionarios = _funcionarioRepositorio.ListarPorUnidade(unidade);
@@ -71,6 +72,7 @@ namespace Funcionarios.API.Controllers
 
         //funcionarios?data_inicio={data_inicio}
         [HttpGet]
+        [Route("data_inicio")]
         public ActionResult<IEnumerable<FuncionarioModel>> ListarPorData([FromQuery] DateTime data_inicio)
         {
             var funcionarios = _funcionarioRepositorio.ListarPorData(data_inicio);
@@ -84,6 +86,7 @@ namespace Funcionarios.API.Controllers
 
         //funcionarios?funcao={codigo_funcao}
         [HttpGet]
+        [Route("codigo_funcao")]
         public ActionResult<IEnumerable<FuncionarioModel>> ListarPorFuncao([FromQuery] int codigo_funcao)
         {
             var funcionarios = _funcionarioRepositorio.ListarPorFuncao(codigo_funcao);
