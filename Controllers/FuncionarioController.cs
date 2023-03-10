@@ -32,28 +32,46 @@ namespace Funcionarios.API.Controllers
         [HttpPost]
         public async Task<ActionResult<FuncionarioModel>> CadastrarFuncionario([FromBody] FuncionarioModel funcionarioModel)
         {
-            if(!ModelState.IsValid)
-                return BadRequest();
-
-            FuncionarioModel funcionario = await _funcionarioRepositorio.CadastrarFuncionario(funcionarioModel);
-            return Ok(funcionario);
+            try
+            {
+                FuncionarioModel funcionario = await _funcionarioRepositorio.CadastrarFuncionario(funcionarioModel);
+                return Ok(funcionario);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
         }
         [HttpPut("{cdMatricula}")]
         public async Task<ActionResult<FuncionarioModel>> AtualizarFuncionario([FromBody] FuncionarioModel funcionarioModel, int cdMatricula)
         {
-            funcionarioModel.cdMatricula = cdMatricula;
-            FuncionarioModel funcionario = await _funcionarioRepositorio.AtualizarFuncionario(funcionarioModel, cdMatricula);
+            try
+            {
+                funcionarioModel.cdMatricula = cdMatricula;
+                FuncionarioModel funcionario = await _funcionarioRepositorio.AtualizarFuncionario(funcionarioModel, cdMatricula);
 
-            return Ok(funcionario);
+                return Ok(funcionario);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
 
         }
 
         [HttpDelete("{cdMatricula}")]
         public async Task<ActionResult> DeletarFuncionario(int cdMatricula)
         {
-            bool delete = await _funcionarioRepositorio.DeletarFuncionario(cdMatricula);
+            try
+            {
+                bool delete = await _funcionarioRepositorio.DeletarFuncionario(cdMatricula);
 
-            return Ok(delete);
+                return Ok(delete);
+            }
+            catch (Exception ex)
+            {
+                return NotFound();
+            }
         }
 
         //funcionarios?unidade={nome_unidade}
